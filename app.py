@@ -10,7 +10,7 @@ TEMPLATE = """
 <html>
   <head>
     <title>Live Clock</title>
-    <meta http-equiv="refresh" content="5">
+  #  <meta http-equiv="refresh" content="5">
     <style>
       body { background-color: green; color: cyan; font-family: Arial; font-size: 30px; text-align: center; padding-top: 100px; }
     </style>
