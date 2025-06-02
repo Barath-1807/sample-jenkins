@@ -1,7 +1,4 @@
-# web_clock.py
-
 from flask import Flask, render_template_string
-from time import strftime
 
 app = Flask(__name__)
 
@@ -10,21 +7,32 @@ TEMPLATE = """
 <html>
   <head>
     <title>Live Clock</title>
-  #  <meta http-equiv="refresh" content="5">
     <style>
       body { background-color: green; color: cyan; font-family: Arial; font-size: 30px; text-align: center; padding-top: 100px; }
     </style>
+    <script>
+      function updateClock() {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-GB'); // 24-hour format
+        const date = now.toLocaleDateString('en-GB'); // dd-mm-yyyy
+        document.getElementById('clock').innerHTML = time + "
+" + date;
+      }
+
+      setInterval(updateClock, 1000); // Update every second
+      window.onload = updateClock;
+    </script>
   </head>
   <body>
-    <div>{{ time }}</div>
+    <div id="clock"></div>
   </body>
 </html>
 """
 
 @app.route('/')
 def clock():
-    current_time = strftime("%H:%M:%S<br>%d-%m-%Y")
-    return render_template_string(TEMPLATE, time=current_time)
+    return render_template_string(TEMPLATE)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+ 
